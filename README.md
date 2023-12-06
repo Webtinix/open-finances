@@ -106,16 +106,16 @@ git remote set-url origin https://github.com/Webtinix/open-finances.git
 
 Modification du dépôt Git au projet.
 
-## 2. Envoie du code (Push) projet sur le dépôt distant Git
+## 2. Envoie du code projet (Push) sur le dépôt distant Git
 
 ```bash
-git add . && git commit -m "your commit" && git push -u origin master
+git add . && git commit -m "your commit" && git push -u origin main
 git add . && git commit -m 'your commit' && git push origin
 ```
 
 ```bash
-git push --set-upstream origin master -f
+git push --set-upstream origin main -f
 ```
 
-Pour le rendre en amont ou en poussée.
+Pour pousser la branche courante et définir la branche distante comme branche amont.
 
