@@ -90,6 +90,12 @@ Crée une application Django nommée "app" dans le répertoire src.
 python src/manage.py makemigrations app
 ```
 
+## 11. Création d'un super utilisateur
+
+```bash
+python src/manage.py createsuperuser
+```
+
 # Installation et Configuration de Git
 
 ## 1. Initialisation du dépôt Git
