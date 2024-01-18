@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load add_attr %}
+
+{% block title %}<title>Formulaire {{ title }} | Open finances</title>{% endblock %}
+
+{% block content %}
+
+    <section id="BDL">
+        <h2 class="text-xl sm:text-2xl my-4 font-medium text-black/80">{{ title }}</h2>
+        
+        <form method="POST" class="flex flex-col my-3 sm:my-5 flex gap-2">
+            {% csrf_token %}
+
+            {% for field in form %}
+                
+                <div class="py-2">
+                    {{ field.errors }}
+                </div>
+
+                <b class="px-2">{{ field.label }}:</b>
+                <label for="" class="w-1/2" style="text-align: left;">
+                    {{ field|add_attr:"style=text-align: left;" }}
+                </label>
+
+                {% if field.help_text %}
+                    <p class="help" id="{{ field.auto_id }}_helptext">
+                        {{ field.help_text|safe }}
+                    </p>
+                {% endif %}
+                
+            {% endfor %}
+
+            <div>
+                <button type="submit" 
+                    style="
+                        background-color: rgb(29 78 216); 
+                        color: white; 
+                        border-radius: 0.375rem; 
+                        margin-top: 1rem;" 
+                    class="rounded-md w-48 p-2 mx-2">Enregistrer
+                </button>
+            </div>
+
+        </form>
+        
+    </section>
+
+{% endblock %}

@@ -17,6 +17,36 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from app.views import BordereauLivraisonCreateView, BordereauLivraisonView, ClientCreateView, ClientUpdateView, ClientView, DashView, FactureCreateView, FactureUpdateView, FactureView, ReportCreateView, ReportUpdateView, ReportView, index, signup
+
+
 urlpatterns = [
+    
+    path('', index, name="index"),
+
+    path('signup', signup, name="signup"),
+
+    path('dashbord', DashView.as_view(), name="dash-view"),
+    
+    path('bls/', BordereauLivraisonView.as_view(), name="bl-list"),
+    path('bl/<int:pk>', BordereauLivraisonView.as_view(), name="view-list"),
+    path('bl/create', BordereauLivraisonCreateView.as_view(), name="bl-create"),
+    path('bl/facture/<int:pk>/create', BordereauLivraisonCreateView.as_view(), name="bl-facture-create"),
+    
+    path('clients/', ClientView.as_view(), name="client-list"),
+    path('client/<int:pk>', ClientView.as_view(), name="view-list"),
+    path('client/create', ClientCreateView.as_view(), name="client-create"),
+    path('client/<int:pk>/update', ClientUpdateView.as_view(), name="client-update"),
+    
+    path('factures/', FactureView.as_view(), name="facture-list"),
+    path('facture/<int:pk>', FactureView.as_view(), name="view-list"),
+    path('facture/create', FactureCreateView.as_view(), name="facture-create"),
+    path('facture/<int:pk>/update', FactureUpdateView.as_view(), name="facture-update"),
+    
+    path('reports/', ReportView.as_view(), name="report-list"),
+    path('report/facture/<int:pk>/create', ReportCreateView.as_view(), name="report-facture-create"),
+    path('report/<int:pk>/update', ReportUpdateView.as_view(), name="report-update"),
+
+
     path('admin/', admin.site.urls),
 ]
