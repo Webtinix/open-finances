@@ -1,0 +1,59 @@
+{% load static %}
+
+
+<menu id="sideBar"
+    class=" transition-[left] z-20 bg-inherit lg:bg-transparent backdrop-blur-3xl  rounded-e-3xl p-6 lg:p-0 fixed -left-[100vw] lg:relative lg:left-0 lg:w-[22vw] md:w-[50vw] w-[80vw] h-full text-white/80 overflow-y-auto ">
+    <figure class="flex py-3  ">
+        <img class="w-28" src="{% static 'img/Groupe 11.png' %}" alt="">
+        <button onclick="changeClass({id:'sideBar',oldName:'left-0',newName:'-left-[100vw]'})"
+            class=" lg:hidden  fixed top-5 right-5 w-5 h-5 grid place-content-center rounded-full z-40 border border-white/70">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="w-3 invert">
+                <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg>
+        </button>
+
+    </figure>
+    <div class="bg-white/20 rounded-full mt-2 px-2 py-1.5 flex items-center gap-1.5 text-base cursor-pointer">
+        <img src="{% static 'img/search.png' %}" alt="" class="w-6">
+        Recherche ici ...
+    </div>
+
+    <h2 class="my-5 mt-8 text-white">MENU PRINCIPAL</h2>
+    <ul id="menu" class=" ">
+        <li class=" {% if request.resolver_match.view_name == 'dash-view' %}active{% endif %}">
+            <a href="{% url 'dash-view' %}" class="flex items-center gap-2 w-full h-full">
+                <img src="{% static 'img/home.png' %}" style="width: 20px;"/> Home
+            </a>
+        </li>
+        <li class="">
+            <a href="{% url 'client-list' %}" class="flex items-center gap-2 w-full h-full"> 
+                <img src="{% static 'img/contacts.png' %}"  style="width: 20px;"/> Clients
+            </a>
+        </li>
+        <li class="">
+            <a href="{% url 'bl-list' %}" class="flex items-center gap-2 w-full h-full"> 
+                <img src="{% static 'img/note.png' %}" style="width: 20px;"/> Bordereau de Livraison
+            </a>
+        </li>
+        <li class="">
+            <a href="{% url 'facture-list' %}" class="flex items-center gap-2 w-full h-full"> 
+                <img src="{% static 'img/dollar.png' %}"  style="width: 20px;"/> Facture
+            </a>
+        </li>
+        <li class="">
+            <a href="{% url 'report-list' %}" class="flex items-center gap-2 w-full h-full">
+                <img src="{% static 'img/graph.png' %}" style="width: 20px;" /> Reporting
+            </a>
+        </li>
+    </ul>
+
+    <h2 class="my-5 mt-10 text-white">PARAMETRES</h2>
+    <ul id="settings">
+        <li class="flex items-center gap-4 text-sm">
+            <a href="{% url 'admin:index' %}" class="flex items-center gap-4 text-sm">
+                <img src="{% static 'img/settings.png' %}" style="width: 20px;"/> Gestion des utilisateurs
+            </a>
+        </li>
+    </ul>
+</menu>

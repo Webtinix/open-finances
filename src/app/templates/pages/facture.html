@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}<title>Factures | Open finances</title>{% endblock %}
+
+
+{% block content %}
+
+    <!-- Facture -->
+    <section id="FACTURE" class="active">
+        <h2 class="mb-8 lg:mb-0 text-xl sm:text-2xl font-medium text-black/80">Factures</h2>
+        <div style="text-align: right; margin: 40px 0px;">
+            <a href="{% url 'facture-create' %}"
+                style="
+                    background-color: rgb(29 78 216); 
+                    color: white; 
+                    border-radius: 0.375rem; 
+                    margin-top: 1rem;" 
+                class="rounded-md w-48 p-2 mx-2">
+                    Nouvelle facture
+            </a>
+        </div>
+        <div
+            class="slider flex flex-wrap justify-center sm:justify-normal  gap-8 sm:gap-4 w-full h-fit my-3 sm:my-7 ">
+            
+            {% for fa in page_obj %}
+                <article>
+                    <div class="flex flex-col gap-4 h-58 mb-4 overflow-hidden  ">
+                        <h2 class=" flex justify-between text-base font-semibold  text-black">
+                            <span>{{ fa.numero_ordre }}</span>
+                            <span>{{ fa.date_facture }}</span>
+                        </h2>
+                        <p><span>Nom de l'article : </span> Bouteilles de gaz</p>
+                        <p><span>Quantité de bouteilles : </span> {{ fa.rapport_set.first.poids_bouteilles|default:'Inconu' }}</p>
+                        <p><span>Prix Total : </span> {{ fa.montant_total }}</p>
+                        <hr />
+                        <p><span>Total de bouteilles: </span> {{ fa.rapport_set.first.nombre_bouteilles }}</p>
+                        <p><span>Poids total: </span> {{ fa.rapport_set.first.poids_bouteilles }}</p>
+                        <p><span>Total par catégorie: </span> {{ fa.rapport_set.first.total_par_categories }}</p>
+                    </div>
+                    
+                    <hr />
+                    
+                    {% if fa.bordereaulivraison_set.first %}
+                        <a href="{% url 'view-list' pk=fa.bordereaulivraison_set.first.pk %}" class="m-auto text-blue-700 text-xl text-center">Voir le bordereau de livraison</a>
+                    {% else %}
+                        <a href="{% url 'bl-facture-create' pk=fa.pk %}" class="m-auto text-xl text-center" style="color: rgb(34 197 94);">Ajouter un bordereau de livraison</a>
+                    {% endif %}
+
+                    <a href="{% url 'facture-update' pk=fa.pk %}" class="text-blue-700 font-medium text-center">Modifier</a>
+                </article>
+            {% endfor %}
+            
+            <!-- <article>
+                <div class="flex flex-col gap-4 h-58 mb-4 overflow-hidden  ">
+                    <h2 class=" flex justify-between text-base font-semibold  text-black">
+                        <span>BL n°000123</span>
+                        <span>18/01/2024</span>
+                    </h2>
+                    <p><span>Nom de l'article : </span> </p>
+                    <p><span>Quantité de bouteilles : </span> </p>
+                    <p><span>Poids unitaire : </span> </p>
+                    <p><span>Prix unitaire: </span> </p>
+                    <p><span>Total par catégorie: </span> </p>
+                    <p><span>Total : </span> </p>
+                </div>
+                <button class="text-blue-700 font-medium">Voir le bordereau de livraison</button>
+            </article> -->
+
+        </div>
+
+        {% include "components/pagination.html" with page_obj=page_obj %}
+    </section>
+
+{% endblock %}

@@ -96,6 +96,12 @@ python src/manage.py makemigrations app
 python src/manage.py createsuperuser
 ```
 
+## 12. Django shell
+
+```bash
+python src/manage.py shell
+```
+
 # Installation et Configuration de Git
 
 ## 1. Initialisation du dépôt Git
@@ -125,3 +131,75 @@ git push --set-upstream origin main -f
 
 Pour pousser la branche courante et définir la branche distante comme branche amont.
 
+# Configuration de la base de données PostgreSQL
+
+## 1. Afficher rôle et utilisateur
+
+```bash
+\du
+```
+
+Affiche tous les utilisateurs et rôles de la base de données.
+
+## 2. Création d'utilisateur 
+
+```bash
+CREATE USER user WITH ENCRYPTED PASSWORD 'p@$$w0rd';
+```
+
+Créé l'utilisateur **user** dans la base de données et lui attribue le mot de passe **p@$$w0rd**.
+
+```bash
+ALTER ROLE user SET client_encoding TO 'utf8';
+```
+
+Modification du paramêtre **client_encoding** en **utf8**.
+
+```bash
+ALTER ROLE user SET default_transaction_isolation TO 'read committed';
+```
+
+Modification du paramêtre **default_transaction_isolation** en **read committed**.
+
+## 3. Liste des bases de données
+
+```bash
+\l
+```
+
+Lister toutes les bases de données du SGBD.
+
+```bash
+CREATE DATABASE bdd;
+```
+
+Créer la base de données **bdd**.
+
+```bash
+GRANT ALL PRIVILEGES ON DATABASE bdd TO user;
+```
+
+Donner tous les droits à l'utilisateur **user** sur la base de données **bdd**.
+
+```bash
+ALTER DATABASE bdd OWNER TO user;
+```
+
+Définir **user** comme propriétaire de la base de données **bdd**.
+
+
+
+
+
+
+https://realpython.com/customize-django-admin-python/
+https://docs.djangoproject.com/fr/3.0/topics/forms/modelforms/
+
+https://www.youtube.com/watch?v=cgj4sz0bytk
+https://www.youtube.com/watch?v=eosXCVcgtPw
+
+https://docs.djangoproject.com/fr/5.0/topics/pagination/
+https://docs.djangoproject.com/fr/5.0/topics/forms/
+https://docs.djangoproject.com/fr/5.0/topics/forms/modelforms/#top
+
+https://docs.djangoproject.com/fr/5.0/ref/contrib/admin/#django.contrib.admin.InlineModelAdmin
