@@ -102,7 +102,7 @@ DATABASES = {
         'NAME': 'openfina',
         'USER': 'opfina',
         'PASSWORD': 'opfina$123@_',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

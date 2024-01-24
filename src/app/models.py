@@ -33,6 +33,18 @@ class Facture(models.Model):
 
     def __str__(self):
         return self.numero_ordre
+    
+    @property
+    def nombre_bouteilles(self):
+        return Rapport.objects.get(facture = self).nombre_bouteilles
+
+    @property
+    def poids_bouteilles(self):
+        return Rapport.objects.get(facture = self).poids_bouteilles
+
+    @property
+    def total_par_categories(self):
+        return Rapport.objects.get(facture = self).total_par_categories
 
 class Rapport(models.Model):
     nombre_bouteilles = models.IntegerField(default=0, verbose_name="Nombre de bouteilles",)
