@@ -93,3 +93,13 @@ class RapportForm(forms.ModelForm):
             "poids_bouteilles": "Poids bouteille",
             "total_par_categories": "Total par catégories",
         }
+
+""" FactureRapportFormSet = forms.inlineformset_factory(Facture, Rapport, fields=[
+    "numero_ordre",
+    "date_facture",
+    "montant_total",
+    "client",
+    "nombre_bouteilles",
+    "poids_bouteilles",
+    "total_par_categories",
+]) """

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from app.forms import BordereauLivraisonForm, ClientForm
+from app.forms import BordereauLivraisonForm, ClientForm, FactureForm
 
 # Register your models here.
-from app.models import Client, BordereauLivraison
+from app.models import Client, BordereauLivraison, Facture, Rapport
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
@@ -49,3 +49,40 @@ class BLAdmin(admin.ModelAdmin):
     # list_filter = ("",)
 
     list_per_page = 10
+
+class RapportInline(admin.TabularInline):
+    model = Rapport
+    extra = 1
+    max_num = 1
+    min_num = 1
+
+@admin.register(Facture)
+class FactureAdmin(admin.ModelAdmin):
+    inlines = [
+        RapportInline,
+    ]
+
+    form = FactureForm
+
+    list_display = (
+        "numero_ordre",
+        "date_facture",
+        "montant_total",
+        "nombre_bouteilles",
+        "poids_bouteilles",
+        "total_par_categories",
+        "client",
+    )
+
+    search_fields = (
+        "numero_ordre",
+        "date_facture",
+        "montant_total",
+        "nombre_bouteilles",
+        "poids_bouteilles",
+        "total_par_categories",
+        "client",
+    )
+
+    list_per_page = 10
+
