@@ -13,218 +13,97 @@
         <div class=" flex gap-4 my-5 w-fit ">
             <div
                 class="flex flex-col gap-3 p-5 rounded-[25px] border-[1px] border-gray-950 w-[20.93rem] sm:w-[60vw] md:w-[40vw] lg:w-[26vw]">
-                <h2 class="font-medium text-black/80">Total Clients</h2>
-                <span class="text-4xl font-semibold">13.468</span>
-                <p class="flex gap-2">
+                <h2 class="font-medium text-black/80">Total Utilisateurs</h2>
+                <span class="text-4xl font-semibold">{{ nb_users }}</span>
+                <!-- <p class="flex gap-2">
                     <img src="{% static 'img/graph2.png' %}" class="w-5 h-5" alt="">
                     <span class="text-green-500">+15%</span>
                     depuis le mois précédent
-                </p>
+                </p> -->
             </div>
             <div
                 class="flex flex-col gap-3 p-5 rounded-[25px] border-[1px] border-gray-950 w-[20.93rem]  sm:w-[60vw] md:w-[40vw] lg:w-[26vw]">
                 <h2 class="font-medium text-black/80">Total Clients</h2>
-                <span class="text-4xl font-semibold">13.468</span>
-                <p class="flex gap-2 w-fit">
+                <span class="text-4xl font-semibold">{{ nb_clients }}</span>
+                <!-- <p class="flex gap-2 w-fit">
                     <img src="{% static 'img/graph2.png' %}" class="w-5 h-5" alt="">
                     <span class="text-green-500">+15%</span>
                     depuis le mois précédent
-                </p>
+                </p> -->
             </div>
             <div
                 class="flex flex-col gap-3 p-5 rounded-[25px] border-[1px] border-gray-950 w-[20.93rem]  sm:w-[60vw] md:w-[40vw] lg:w-[26vw]">
-                <h2 class="font-medium text-black/80">Total Clients</h2>
-                <span class="text-4xl font-semibold">13.468</span>
+                <h2 class="font-medium text-black/80">Total Factures</h2>
+                <span class="text-4xl font-semibold">{{ nb_factures }}</span>
                 <p class="flex gap-2">
-                    <img src="{% static 'img/graph2.png' %}" class="w-5 h-5" alt="">
-                    <span class="text-green-500">+15%</span>
+                    {% if comp_last_mouth_factures >= 0 %}
+                        <img src="{% static 'img/graph2.png' %}" class="w-5 h-5" alt="">
+                        <span class="text-green-500">
+                            +{{ comp_last_mouth_factures }}%
+                        </span>
+                    {% else %} 
+                        <img src="{% static 'img/graph2.png' %}" class="w-5 h-5" alt="">
+                        <span style="color: red;">
+                            -{{ comp_last_mouth_factures }}%
+                        </span>
+                    {% endif %} 
+                    
                     depuis le mois précédent
                 </p>
             </div>
 
         </div>
-        <ul class="home-indi">
-            <li class="active"></li>
-            <li></li>
-        </ul>
-        <!-- <div class="flex flex-wrap gap-4 items-start"> -->
-        <div class="dash">
-            <!-- <aside class="flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5 lg:w-fit w-full col-span-5 row-span-5 "> -->
-            <aside
-                class="flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5  col-span-12 lg:col-span-5 row-span-6 ">
-                <h2 class=" font-medium text-black/80">Ventes effectuées</h2>
-                <div class="flex justify-center  gap-4 md:gap-10 lg:gap-4 w-full h-[25vh] lg:h-full  ">
-                    <div class="progressbar  after:h-[90%]"></div>
-                    <div class="progressbar  after:h-[90%]"></div>
-                    <div class="progressbar  after:h-[50%]"></div>
-                    <div class="progressbar  after:h-[30%]"></div>
-                    <div class="progressbar  after:h-[90%]"></div>
-                    <div class="progressbar  after:h-[20%]"></div>
-                    <div class="progressbar  after:h-[90%]"></div>
-                    <div class="progressbar  after:h-[10%]"></div>
-                    <div class="progressbar  after:h-[90%]"></div>
-                    <div class="progressbar  after:h-[90%]"></div>
-                
-                </div>
-            </aside>
-            <!-- <aside class=" relative flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5 h-fit w-full md:w-[30vw] lg:w-[45vw]  "> -->
-            <aside
-                class=" relative flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5 col-span-12 lg:col-span-7 row-span-4 ">
-                <div class="flex gap-4 absolute right-5 top-5">
-                    <button class="bg-black/10 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="w-5 sm:w-8">
-                            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
-                        </svg>
-                    </button>
-                    <button class="bg-black/10 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"
-                            class="w-5 sm:w-8 rotate-180">
-                            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
-                        </svg>
-                    </button>
-                </div>
-                <h2 class=" font-medium text-black/80">Janvier <span class="text-yellow">2024</span></h2>
-                <div class="flex w-full overflow-hidden">
-                    <table class="w-full text-center">
-                        <tr class="">
-                            <th>Dim</th>
-                            <th>Lun</th>
-                            <th>Mar</th>
-                            <th>Mer</th>
-                            <th>Jeu</th>
-                            <th>Ven</th>
-                            <th>Sam</th>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td class="active">11</td>
-                            <td>12</td>
-                            <td>13</td>
-                        </tr>
-                    </table>
-
-                </div>
-            </aside>
-            <!-- <aside class="flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5 lg:w-[28vw] w-full  lg:h-[33vh]"> -->
-            <aside
-                class="flex flex-col gap-5 border border-gray-950 rounded-[25px] p-5 col-span-12 lg:col-span-5 lg:row-start-7 row-span-5  ">
-                <h2 class=" font-medium text-black/80">Autres </h2>
-                <div class="flex gap-5">
-                    <ul class="flex flex-col gap-5">
-                        <li>Utilisateur PC</li>
-                        <li class="text-3xl font-medium">31,12%</li>
-                        <li class="w-8 h-1 sm:h-3 bg-yellow rounded-lg"></li>
-                    </ul>
-                    <ul class="flex flex-col gap-5">
-                        <li>Utilisateur Mobile</li>
-                        <li class="text-3xl font-medium">66,88%</li>
-                        <li class="w-16 h-1 sm:h-3 bg-yellow rounded-lg"></li>
-                    </ul>
-                </div>
-            </aside>
-            <!-- <aside class=" overflow-hidden px-1 pb-5 lg:-mt-[22vh] flex flex-col gap-3 border border-gray-950 rounded-[25px]  w-full lg:w-[45vw]  "> -->
-            <aside
-                class=" overflow-hidden px-1 pb-5 flex flex-col gap-3 border border-gray-950 rounded-[25px]  col-span-12 lg:col-span-7 " style="grid-row: span 7 / span 7;">
-                <h2 class=" font-medium text-black/80 p-2 ">Programme en cours </h2>
-                <form class="h-[40dvh] overflow-y-auto">
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
+        
+        {% comment "Optional note" %}
+            <!-- <div class="flex flex-wrap gap-4 items-start"> -->
+            <div class="dash">
+                <!-- <aside class="flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5 lg:w-fit w-full col-span-5 row-span-5 "> -->
+                <aside
+                    class="flex flex-col gap-3 border border-gray-950 rounded-[25px] p-5  col-span-12 lg:col-span-5 row-span-6 ">
+                    <h2 class=" font-medium text-black/80">Factures passées</h2>
+                    <div class="flex justify-center  gap-4 md:gap-10 lg:gap-4 w-full h-[25vh] lg:h-full  ">
+                        {% for stat_facture in stats_factures %}
+                            {% if stat_facture.percent > 0 %}
+                                <div class="progressbar  after:h-[{{ stat_facture.percent }}%]"></div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <!-- <div class="progressbar  after:h-[90%]"></div>
+                        <div class="progressbar  after:h-[90%]"></div>
+                        <div class="progressbar  after:h-[50%]"></div>
+                        <div class="progressbar  after:h-[30%]"></div>
+                        <div class="progressbar  after:h-[90%]"></div>
+                        <div class="progressbar  after:h-[20%]"></div>
+                        <div class="progressbar  after:h-[90%]"></div>
+                        <div class="progressbar  after:h-[10%]"></div>
+                        <div class="progressbar  after:h-[90%]"></div>
+                        <div class="progressbar  after:h-[90%]"></div> -->
+                    </div>
+                </aside>
+                <!-- <aside class=" overflow-hidden px-1 pb-5 lg:-mt-[22vh] flex flex-col gap-3 border border-gray-950 rounded-[25px]  w-full lg:w-[45vw]  "> -->
+                    <aside
+                    class=" overflow-hidden px-1 pb-5 flex flex-col gap-3 border border-gray-950 rounded-[25px]  col-span-12 lg:col-span-7 " style="grid-row: span 7 / span 7;">
+                    <h2 class=" font-medium text-black/80 p-2 ">Programme en cours </h2>
+                    <form class="h-[40dvh] overflow-y-auto">
+                        {% for last_facture in lastest_factures %}
+                            <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
+                                <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
+                                <li class="flex items-center gap-5">
+                                    <ul>
+                                        <li class="text-[.8rem] text-black/80 inline">{{ last_facture.date_facture|date:'D, d b' }}</li>
+                                        <li class="text-lg font-medium -mt-1">{{ last_facture.date_creation|date:'H:i' }}</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text-lg font-medium ">Facture - {{ last_facture.numero_ordre }}</li>
+                                        <li class="-mt-1 text-[.8rem] text-black/80">{{ last_facture.creator.denomination }}</li>
+                                    </ul>
+                                </li>
                             </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="flex gap-5 items-center hover:bg-yellow/50 p-3 rounded-2xl overflow-hidden">
-                        <li><input type="checkbox" name="" id="" class="checked:bg-yellow"></li>
-                        <li class="flex items-center gap-5">
-                            <ul>
-                                <li class="text-[.8rem] text-black/80 inline">jeu,11 jan</li>
-                                <li class="text-lg font-medium -mt-1">09:30</li>
-                            </ul>
-                            <ul>
-                                <li class="text-lg font-medium ">Réapprovisionnement</li>
-                                <li class="-mt-1 text-[.8rem] text-black/80">Patrick Nguya et +20 autres</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </form>
-            </aside>
-        </div>
-
+                        {% endfor %}
+                    </form>
+                </aside>
+            </div>
+        {% endcomment %}
     </section>
 
 {% endblock %}

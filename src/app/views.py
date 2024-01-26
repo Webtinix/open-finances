@@ -1,5 +1,7 @@
 import datetime
+import decimal
 import email
+import math
 from turtle import title
 from typing import Any
 from django.db.models.query import QuerySet
@@ -11,6 +13,8 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView
 from app.forms import BordereauLivraisonForm, ClientForm, FactureForm, RapportForm
 from django.contrib.auth.models import User
+
+from django.db.models import Sum, Count
 
 from app.models import BordereauLivraison, Client, Facture, Rapport
 
@@ -61,6 +65,50 @@ def signup(request):
 class DashView(TemplateView):
     template_name = "pages/index.html"
     # template_name = "pages/form.html"
+
+    def factures_by_year(self):
+
+        cyear = datetime.date.today().year
+        cmonth = datetime.date.today().month
+
+        year  = cyear - 1
+        month = cmonth - 12
+
+        max_montant_total = Facture.objects.aggregate(Count('pk'), Sum('montant_total'))['montant_total__sum'] or 0
+
+        d = []
+
+        while year <= cyear:
+            while (year < cyear and month <= 12) or (year == cyear and month <= cmonth):
+                factures = Facture.objects.order_by('-id').filter(date_creation__year=year, date_creation__month=month).aggregate(Count('pk'), Sum('montant_total'))
+                d.append({
+                    'year': year,
+                    'month': month,
+                    'count': factures['pk__count'] or 0,
+                    'sum': decimal.Decimal(factures['montant_total__sum'] or 0),
+                    'max': max_montant_total,
+                    'percent': int((factures['montant_total__sum'] / max_montant_total) * 100) if factures['montant_total__sum'] and max_montant_total > 0 else 0,
+                })
+                month += 1
+            month = 1
+            year += 1
+
+        return d
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context =  super().get_context_data(**kwargs)
+        
+        context['stats_factures'] = self.factures_by_year()[:12] 
+        
+        context['nb_users'] = User.objects.all().count()
+        context['nb_clients'] = Client.objects.all().count()
+
+        context['nb_factures'] = Facture.objects.all().count()
+        context['comp_last_mouth_factures'] = (context['stats_factures'][0]['sum'] - context['stats_factures'][1]['sum']) or 0
+
+        context['lastest_factures'] = Facture.objects.all().order_by('-id')[:10] 
+
+        return context
 
 
 # Début BL
