@@ -12,6 +12,8 @@ Cette commande crée un environnement virtuel nommé .env dans le répertoire ac
 
 ```bash
 pip install --upgrade pip
+
+python.exe -m pip install --upgrade pip
 ```
 
 Assurez-vous que pip, l'outil de gestion des paquets de Python, est à la dernière version.

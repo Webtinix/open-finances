@@ -13,18 +13,22 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i8$0z$zcw!-qetv)u&r_u1r!v&%rv2&)u^vl3nq=c2%*ghm7bu'
+SECRET_KEY = os.environ.get('SECRET_KEY') # SECRET_KEY = 'django-insecure-i8$0z$zcw!-qetv)u&r_u1r!v&%rv2&)u^vl3nq=c2%*ghm7bu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') # DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -97,13 +101,25 @@ DATABASES = {
     # }
 
     # PostgreSQL
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'openfina',
+    #     'USER': 'opfina',
+    #     'PASSWORD': 'opfina$123@_',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    #     # 'OPTIONS': { 
+    #     #     'client_encoding': 'UTF8', 
+    #     # },
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'openfina',
-        'USER': 'opfina',
-        'PASSWORD': 'opfina$123@_',
-        'HOST': 'db',
-        'PORT': '5432',
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
