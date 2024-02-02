@@ -11,11 +11,15 @@ services:
     restart: always
     volumes:
       - "../data/db:/var/lib/postgresql/data"
-      - ./docker-entrypoint-initdb.d/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./docker-entrypoint-initdb.d/init.sh:/docker-entrypoint-initdb.d/init.sh
     environment:
-      POSTGRES_USER: opfina
-      POSTGRES_PASSWORD: opfina$123@_
-      POSTGRES_DB: openfina
+      # POSTGRES_USER: opfina
+      # POSTGRES_PASSWORD: opfina$123@_
+      # POSTGRES_DB: openfina
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: p@$$w0rd
+      POSTGRES_DB: opdb
       POSTGRES_INITDB_ARGS: '--encoding=UTF-8 --lc-collate=C --lc-ctype=C'
     networks:
         - wx_openfina_db
@@ -32,7 +36,7 @@ services:
       - db
     environment:
       PGADMIN_DEFAULT_EMAIL: tech@webtinix.com
-      PGADMIN_DEFAULT_PASSWORD: opfina$123@_
+      PGADMIN_DEFAULT_PASSWORD: p@$$w0rd
     networks:
         - wx_openfina_db
 
